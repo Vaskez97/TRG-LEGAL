@@ -1,0 +1,45 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { PageShell } from "../../components/site/PageShell";
+import { ServiceTemplate } from "../../components/site/ServiceTemplate";
+
+export const Route = createFileRoute("/servicios/transporte-de-contenedores")({
+  component: Page,
+});
+
+function Page() {
+  return (
+    <PageShell>
+      <ServiceTemplate
+        title="Transporte de contenedores"
+        intro={[
+          "En TRG realizamos el transporte de contenedores estándar de 20 y 40 pies, asegurando una operación eficiente, segura y controlada desde origen a destino.",
+          "Contamos con flota propia de tracto camiones, conductores contratados directamente y monitoreo permanente, lo que nos permite garantizar continuidad operacional y cumplimiento de los compromisos adquiridos con nuestros clientes.",
+        ]}
+        heroImage="https://trg.cl/storage/servicios/transporte-de-contenedores-2.jpeg"
+        gallery={[
+          "https://trg.cl/storage/servicios/transporte-de-contenedores-1.jpeg",
+          "https://trg.cl/storage/servicios/transporte-de-contenedores-41776655317.jpeg",
+          "https://trg.cl/storage/servicios/transporte-de-contenedores-41776655452.jpeg",
+          "https://trg.cl/storage/slides/1.jpeg",
+        ]}
+        benefits={[
+          { title: "Flota propia", detail: "Flota con antigüedad promedio de 7 años." },
+          { title: "Conductores TRG", detail: "Altamente capacitados." },
+          { title: "Monitoreo GPS", detail: "24/7." },
+          { title: "Mayor control", detail: "Y trazabilidad de la carga." },
+        ]}
+        otherServices={[
+          {
+            label: "Transporte de contenedores refrigerados",
+            href: "/servicios/transporte-de-contenedores-refrigerados",
+          },
+          { label: "Almacenaje de carga general", href: "/servicios/almacenaje-de-carga-general" },
+          {
+            label: "Consolidado y desconsolidado de contenedores",
+            href: "/servicios/consolidado-y-desconsolidado-de-contenedores",
+          },
+        ]}
+      />
+    </PageShell>
+  );
+}
