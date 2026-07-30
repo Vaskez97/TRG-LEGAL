@@ -155,7 +155,7 @@ function LegalHeader() {
     ["QUIÉNES SOMOS", "#quienes-somos"],
     ["SERVICIOS", "#servicios"],
     ["CLIENTES", "#clientes"],
-    ["EQUIPO", "#equipo"],
+    ["EQUIPO", "/equipo"],
   ];
 
   return (

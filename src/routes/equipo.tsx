@@ -17,7 +17,7 @@ function LegalTeamPage() {
         <nav aria-label="Navegación de TRG Legal">
           <a href="/#quienes-somos">QUIÉNES SOMOS</a>
           <a href="/#servicios">SERVICIOS</a>
-          <a href="/#equipo">EQUIPO</a>
+          <a href="/equipo" aria-current="page">EQUIPO</a>
           <a className="legal-team-page-nav-cta" href="/#contacto">
             HABLEMOS <ArrowUpRight size={14} strokeWidth={1.5} />
           </a>
