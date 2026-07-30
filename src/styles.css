@@ -1994,6 +1994,7 @@ html {
   background: #f5f5f2;
   box-shadow: 0 4px 16px rgba(5, 26, 36, 0.06);
   transition: transform 220ms ease, box-shadow 220ms ease;
+  cursor: pointer;
 }
 
 .legal-practice-card:hover {
@@ -2233,12 +2234,27 @@ html {
 
 .legal-service-modal {
   position: relative;
-  width: min(560px, 100%);
+  width: min(650px, 100%);
+  max-height: min(720px, calc(100vh - 48px));
+  overflow-y: auto;
   padding: clamp(30px, 5vw, 52px);
   border-radius: 28px;
-  background: #fff;
+  border: 1px solid rgba(7, 27, 50, 0.12);
+  background: linear-gradient(145deg, #fff 0%, #f6f8f8 100%);
   color: var(--legal-ink);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+.legal-service-modal::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -90px;
+  width: 260px;
+  height: 260px;
+  border: 1px solid rgba(11, 79, 138, 0.18);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 .legal-modal-close {
@@ -2260,7 +2276,17 @@ html {
 
 .legal-service-modal > .legal-service-number {
   display: block;
-  margin-bottom: 21px;
+  margin-bottom: 11px;
+}
+
+.legal-modal-kicker {
+  display: block;
+  margin-bottom: 19px;
+  color: var(--legal-blue);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .legal-service-modal h2 {
@@ -2279,6 +2305,34 @@ html {
   color: #5d6971;
   font-size: 16px;
   line-height: 1.55;
+}
+
+.legal-modal-list {
+  display: grid;
+  gap: 12px;
+  max-width: 500px;
+  margin: 28px 0 0;
+  padding: 22px 0 0;
+  border-top: 1px solid rgba(7, 27, 50, 0.12);
+  list-style: none;
+}
+
+.legal-modal-list li {
+  position: relative;
+  padding-left: 19px;
+  color: #344b5a;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.legal-modal-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 7px;
+  height: 1px;
+  background: var(--legal-blue);
 }
 
 .legal-modal-actions {

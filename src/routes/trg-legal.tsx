@@ -41,30 +41,65 @@ const services = [
     title: "Asesoría laboral permanente",
     detail:
       "Acompañamiento jurídico continuo para gestionar el día a día con seguridad y criterio.",
+    modalDetail:
+      "Acompañamos a la empresa en sus decisiones laborales cotidianas, entregando una respuesta oportuna y conectada con la realidad de la operación.",
+    highlights: [
+      "Consultas y decisiones laborales del día a día",
+      "Revisión de contratos, anexos y políticas internas",
+      "Orientación preventiva para jefaturas y equipos de personas",
+    ],
   },
   {
     number: "02",
     title: "Cumplimiento laboral",
     detail:
       "Auditorías, revisión normativa y documentación que ordenan la gestión de personas.",
+    modalDetail:
+      "Ordenamos la gestión laboral para reducir contingencias y construir procesos que puedan sostenerse en el tiempo.",
+    highlights: [
+      "Diagnóstico de brechas y riesgos laborales",
+      "Auditoría de documentación y procesos internos",
+      "Diseño de protocolos, políticas y planes de acción",
+    ],
   },
   {
     number: "03",
     title: "Relaciones laborales",
     detail:
       "Asesoría en la gestión de equipos, sindicatos y relaciones laborales sostenibles.",
+    modalDetail:
+      "Facilitamos relaciones laborales más claras y sostenibles, cuidando el vínculo entre las personas, sus representantes y la organización.",
+    highlights: [
+      "Acompañamiento en relaciones con sindicatos",
+      "Manejo preventivo de conflictos laborales",
+      "Estrategias de comunicación y gestión de equipos",
+    ],
   },
   {
     number: "04",
     title: "Negociación colectiva",
     detail:
       "Estrategia y representación para procesos de negociación claros y bien preparados.",
+    modalDetail:
+      "Preparamos cada etapa de la negociación con una mirada estratégica, técnica y alineada con los objetivos de la empresa.",
+    highlights: [
+      "Preparación de escenarios y estrategia de negociación",
+      "Revisión de instrumentos colectivos y propuestas",
+      "Acompañamiento durante reuniones y acuerdos",
+    ],
   },
   {
     number: "05",
     title: "Litigios laborales",
     detail:
       "Defensa y representación judicial resguardando los intereses de la empresa.",
+    modalDetail:
+      "Representamos a nuestros clientes con una defensa rigurosa y una lectura profunda del contexto operacional de cada caso.",
+    highlights: [
+      "Evaluación de contingencias y estrategia procesal",
+      "Defensa y representación ante tribunales",
+      "Coordinación directa con equipos internos y externos",
+    ],
   },
 ];
 
@@ -494,7 +529,11 @@ export function TrgLegalPage() {
           </div>
           <div className="legal-practice-grid">
             {services.map((service) => (
-              <article className="legal-practice-card" key={service.number}>
+              <article
+                className="legal-practice-card"
+                key={service.number}
+                onClick={() => setActiveService(service)}
+              >
                 <div className="legal-practice-card-top">
                   <span className="legal-service-number">{service.number}</span>
                   <ArrowUpRight
@@ -528,6 +567,7 @@ export function TrgLegalPage() {
               role="dialog"
               aria-modal="true"
               aria-labelledby="service-modal-title"
+              aria-describedby="service-modal-description"
               onMouseDown={(event) => event.stopPropagation()}
             >
               <button
@@ -541,8 +581,14 @@ export function TrgLegalPage() {
               <span className="legal-service-number">
                 {activeService.number}
               </span>
+              <span className="legal-modal-kicker">Detalle del servicio</span>
               <h2 id="service-modal-title">{activeService.title}</h2>
-              <p>{activeService.detail}</p>
+              <p id="service-modal-description">{activeService.modalDetail}</p>
+              <ul className="legal-modal-list">
+                {activeService.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
               <div className="legal-modal-actions">
                 <a
                   className="legal-button legal-button-dark"
