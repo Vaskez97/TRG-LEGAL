@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import gsap from "gsap";
+import { LegalTeamCard } from "../components/LegalTeamCard";
+import { TRG_LEGAL_TEAM } from "../components/legal-team";
 
 export const Route = createFileRoute("/trg-legal")({
   head: () => ({
@@ -584,22 +586,24 @@ export function TrgLegalPage() {
             <h2>
               Un equipo preparado para entender la realidad de cada operación.
             </h2>
+            <p>
+              Conoce a las personas que conectan criterio jurídico, experiencia
+              operativa y una mirada cercana para acompañar cada decisión.
+            </p>
           </div>
-          <div className="legal-team-pending">
-            <div className="legal-team-pending-mark">TRG</div>
-            <div>
-              <span className="legal-team-pending-label">
-                Perfiles profesionales
-              </span>
-              <h3>Próximamente, nuestro equipo</h3>
-              <p>
-                Incorporaremos las fotografías, fichas profesionales y perfiles
-                de LinkedIn de cada integrante.
-              </p>
-              <a className="legal-button legal-button-dark" href="#contacto">
-                Hablemos <ArrowUpRight size={16} strokeWidth={1.5} />
-              </a>
+          <div className="legal-team-cards-wrap">
+            <div className="legal-team-grid">
+              {TRG_LEGAL_TEAM.map((member) => (
+                <LegalTeamCard key={member.name} member={member} />
+              ))}
             </div>
+            <a
+              className="legal-button legal-button-dark legal-team-cta"
+              href="/trg-legal/equipo"
+            >
+              Conoce a nuestro equipo{" "}
+              <ArrowUpRight size={16} strokeWidth={1.5} />
+            </a>
           </div>
         </section>
 
