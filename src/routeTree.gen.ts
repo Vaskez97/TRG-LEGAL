@@ -12,13 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrgLegalRouteImport } from './routes/trg-legal'
 import { Route as TrabajaConNosotrosRouteImport } from './routes/trabaja-con-nosotros'
 import { Route as NosotrosRouteImport } from './routes/nosotros'
+import { Route as EquipoRouteImport } from './routes/equipo'
 import { Route as EmpresasRouteImport } from './routes/empresas'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as CompromisoRouteImport } from './routes/compromiso'
 import { Route as ClientesYTestimoniosRouteImport } from './routes/clientes-y-testimonios'
 import { Route as ActualidadRouteImport } from './routes/actualidad'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TrgLegalEquipoRouteImport } from './routes/trg-legal/equipo'
 import { Route as TerminalTerminalValparaisoRouteImport } from './routes/terminal/terminal-valparaiso'
 import { Route as TerminalTerminalSanAntonioRouteImport } from './routes/terminal/terminal-san-antonio'
 import { Route as ServiciosTransporteDeContenedoresRefrigeradosRouteImport } from './routes/servicios/transporte-de-contenedores-refrigerados'
@@ -39,6 +39,11 @@ const TrabajaConNosotrosRoute = TrabajaConNosotrosRouteImport.update({
 const NosotrosRoute = NosotrosRouteImport.update({
   id: '/nosotros',
   path: '/nosotros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipoRoute = EquipoRouteImport.update({
+  id: '/equipo',
+  path: '/equipo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmpresasRoute = EmpresasRouteImport.update({
@@ -70,11 +75,6 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const TrgLegalEquipoRoute = TrgLegalEquipoRouteImport.update({
-  id: '/equipo',
-  path: '/equipo',
-  getParentRoute: () => TrgLegalRoute,
 } as any)
 const TerminalTerminalValparaisoRoute =
   TerminalTerminalValparaisoRouteImport.update({
@@ -120,16 +120,16 @@ export interface FileRoutesByFullPath {
   '/compromiso': typeof CompromisoRoute
   '/contacto': typeof ContactoRoute
   '/empresas': typeof EmpresasRoute
+  '/equipo': typeof EquipoRoute
   '/nosotros': typeof NosotrosRoute
   '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
-  '/trg-legal': typeof TrgLegalRouteWithChildren
+  '/trg-legal': typeof TrgLegalRoute
   '/servicios/almacenaje-de-carga-general': typeof ServiciosAlmacenajeDeCargaGeneralRoute
   '/servicios/consolidado-y-desconsolidado-de-contenedores': typeof ServiciosConsolidadoYDesconsolidadoDeContenedoresRoute
   '/servicios/transporte-de-contenedores': typeof ServiciosTransporteDeContenedoresRoute
   '/servicios/transporte-de-contenedores-refrigerados': typeof ServiciosTransporteDeContenedoresRefrigeradosRoute
   '/terminal/terminal-san-antonio': typeof TerminalTerminalSanAntonioRoute
   '/terminal/terminal-valparaiso': typeof TerminalTerminalValparaisoRoute
-  '/trg-legal/equipo': typeof TrgLegalEquipoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -138,16 +138,16 @@ export interface FileRoutesByTo {
   '/compromiso': typeof CompromisoRoute
   '/contacto': typeof ContactoRoute
   '/empresas': typeof EmpresasRoute
+  '/equipo': typeof EquipoRoute
   '/nosotros': typeof NosotrosRoute
   '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
-  '/trg-legal': typeof TrgLegalRouteWithChildren
+  '/trg-legal': typeof TrgLegalRoute
   '/servicios/almacenaje-de-carga-general': typeof ServiciosAlmacenajeDeCargaGeneralRoute
   '/servicios/consolidado-y-desconsolidado-de-contenedores': typeof ServiciosConsolidadoYDesconsolidadoDeContenedoresRoute
   '/servicios/transporte-de-contenedores': typeof ServiciosTransporteDeContenedoresRoute
   '/servicios/transporte-de-contenedores-refrigerados': typeof ServiciosTransporteDeContenedoresRefrigeradosRoute
   '/terminal/terminal-san-antonio': typeof TerminalTerminalSanAntonioRoute
   '/terminal/terminal-valparaiso': typeof TerminalTerminalValparaisoRoute
-  '/trg-legal/equipo': typeof TrgLegalEquipoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -157,16 +157,16 @@ export interface FileRoutesById {
   '/compromiso': typeof CompromisoRoute
   '/contacto': typeof ContactoRoute
   '/empresas': typeof EmpresasRoute
+  '/equipo': typeof EquipoRoute
   '/nosotros': typeof NosotrosRoute
   '/trabaja-con-nosotros': typeof TrabajaConNosotrosRoute
-  '/trg-legal': typeof TrgLegalRouteWithChildren
+  '/trg-legal': typeof TrgLegalRoute
   '/servicios/almacenaje-de-carga-general': typeof ServiciosAlmacenajeDeCargaGeneralRoute
   '/servicios/consolidado-y-desconsolidado-de-contenedores': typeof ServiciosConsolidadoYDesconsolidadoDeContenedoresRoute
   '/servicios/transporte-de-contenedores': typeof ServiciosTransporteDeContenedoresRoute
   '/servicios/transporte-de-contenedores-refrigerados': typeof ServiciosTransporteDeContenedoresRefrigeradosRoute
   '/terminal/terminal-san-antonio': typeof TerminalTerminalSanAntonioRoute
   '/terminal/terminal-valparaiso': typeof TerminalTerminalValparaisoRoute
-  '/trg-legal/equipo': typeof TrgLegalEquipoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -177,6 +177,7 @@ export interface FileRouteTypes {
     | '/compromiso'
     | '/contacto'
     | '/empresas'
+    | '/equipo'
     | '/nosotros'
     | '/trabaja-con-nosotros'
     | '/trg-legal'
@@ -186,7 +187,6 @@ export interface FileRouteTypes {
     | '/servicios/transporte-de-contenedores-refrigerados'
     | '/terminal/terminal-san-antonio'
     | '/terminal/terminal-valparaiso'
-    | '/trg-legal/equipo'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -195,6 +195,7 @@ export interface FileRouteTypes {
     | '/compromiso'
     | '/contacto'
     | '/empresas'
+    | '/equipo'
     | '/nosotros'
     | '/trabaja-con-nosotros'
     | '/trg-legal'
@@ -204,7 +205,6 @@ export interface FileRouteTypes {
     | '/servicios/transporte-de-contenedores-refrigerados'
     | '/terminal/terminal-san-antonio'
     | '/terminal/terminal-valparaiso'
-    | '/trg-legal/equipo'
   id:
     | '__root__'
     | '/'
@@ -213,6 +213,7 @@ export interface FileRouteTypes {
     | '/compromiso'
     | '/contacto'
     | '/empresas'
+    | '/equipo'
     | '/nosotros'
     | '/trabaja-con-nosotros'
     | '/trg-legal'
@@ -222,7 +223,6 @@ export interface FileRouteTypes {
     | '/servicios/transporte-de-contenedores-refrigerados'
     | '/terminal/terminal-san-antonio'
     | '/terminal/terminal-valparaiso'
-    | '/trg-legal/equipo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -232,9 +232,10 @@ export interface RootRouteChildren {
   CompromisoRoute: typeof CompromisoRoute
   ContactoRoute: typeof ContactoRoute
   EmpresasRoute: typeof EmpresasRoute
+  EquipoRoute: typeof EquipoRoute
   NosotrosRoute: typeof NosotrosRoute
   TrabajaConNosotrosRoute: typeof TrabajaConNosotrosRoute
-  TrgLegalRoute: typeof TrgLegalRouteWithChildren
+  TrgLegalRoute: typeof TrgLegalRoute
   ServiciosAlmacenajeDeCargaGeneralRoute: typeof ServiciosAlmacenajeDeCargaGeneralRoute
   ServiciosConsolidadoYDesconsolidadoDeContenedoresRoute: typeof ServiciosConsolidadoYDesconsolidadoDeContenedoresRoute
   ServiciosTransporteDeContenedoresRoute: typeof ServiciosTransporteDeContenedoresRoute
@@ -264,6 +265,13 @@ declare module '@tanstack/react-router' {
       path: '/nosotros'
       fullPath: '/nosotros'
       preLoaderRoute: typeof NosotrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipo': {
+      id: '/equipo'
+      path: '/equipo'
+      fullPath: '/equipo'
+      preLoaderRoute: typeof EquipoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/empresas': {
@@ -307,13 +315,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/trg-legal/equipo': {
-      id: '/trg-legal/equipo'
-      path: '/equipo'
-      fullPath: '/trg-legal/equipo'
-      preLoaderRoute: typeof TrgLegalEquipoRouteImport
-      parentRoute: typeof TrgLegalRoute
     }
     '/terminal/terminal-valparaiso': {
       id: '/terminal/terminal-valparaiso'
@@ -360,18 +361,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface TrgLegalRouteChildren {
-  TrgLegalEquipoRoute: typeof TrgLegalEquipoRoute
-}
-
-const TrgLegalRouteChildren: TrgLegalRouteChildren = {
-  TrgLegalEquipoRoute: TrgLegalEquipoRoute,
-}
-
-const TrgLegalRouteWithChildren = TrgLegalRoute._addFileChildren(
-  TrgLegalRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActualidadRoute: ActualidadRoute,
@@ -379,9 +368,10 @@ const rootRouteChildren: RootRouteChildren = {
   CompromisoRoute: CompromisoRoute,
   ContactoRoute: ContactoRoute,
   EmpresasRoute: EmpresasRoute,
+  EquipoRoute: EquipoRoute,
   NosotrosRoute: NosotrosRoute,
   TrabajaConNosotrosRoute: TrabajaConNosotrosRoute,
-  TrgLegalRoute: TrgLegalRouteWithChildren,
+  TrgLegalRoute: TrgLegalRoute,
   ServiciosAlmacenajeDeCargaGeneralRoute:
     ServiciosAlmacenajeDeCargaGeneralRoute,
   ServiciosConsolidadoYDesconsolidadoDeContenedoresRoute:

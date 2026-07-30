@@ -2,6 +2,7 @@ import { Linkedin, RotateCcw } from "lucide-react";
 import { useState, type KeyboardEvent } from "react";
 
 export type LegalTeamMember = {
+  id: string;
   name: string;
   role: string;
   summary: string;
@@ -44,9 +45,9 @@ export function LegalTeamCard({ member }: { member: LegalTeamMember }) {
             <h3>{member.name}</h3>
             <p>{member.summary}</p>
           </div>
-          <button type="button" className="legal-flip-trigger" onClick={flip}>
+          <span className="legal-flip-trigger">
             Ver perfil <ArrowMark />
-          </button>
+          </span>
         </div>
 
         <div className="legal-flip-face legal-flip-back">

@@ -2,6 +2,7 @@ import type { LegalTeamMember } from "./LegalTeamCard";
 
 export const TRG_LEGAL_TEAM: LegalTeamMember[] = [
   {
+    id: "felipe-estay",
     name: "Felipe Estay",
     role: "Socio · Abogado",
     summary:
@@ -13,6 +14,7 @@ export const TRG_LEGAL_TEAM: LegalTeamMember[] = [
     tone: "blue",
   },
   {
+    id: "equipo-legal-01",
     name: "Nombre del equipo",
     role: "Equipo TRG Legal",
     summary:
@@ -23,6 +25,7 @@ export const TRG_LEGAL_TEAM: LegalTeamMember[] = [
     tone: "gold",
   },
   {
+    id: "equipo-legal-02",
     name: "Nombre del equipo",
     role: "Equipo TRG Legal",
     summary:

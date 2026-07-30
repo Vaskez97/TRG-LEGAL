@@ -2961,7 +2961,7 @@ html {
 .legal-flip-copy p { max-width: 260px; margin: 14px 0 0; color: #657078; font-size: 13px; line-height: 1.5; }
 .legal-flip-back .legal-flip-copy p { color: rgba(255, 255, 255, 0.72); }
 .legal-flip-trigger, .legal-flip-back-button, .legal-flip-linkedin { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 7px; width: fit-content; border: 0; font-family: var(--legal-font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.13em; line-height: 1; text-transform: uppercase; transition: 180ms ease; }
-.legal-flip-trigger { padding: 0; color: var(--legal-blue); background: transparent; cursor: pointer; }
+.legal-flip-trigger { color: var(--legal-blue); }
 .legal-flip-trigger:hover, .legal-flip-trigger:focus-visible { color: var(--legal-ink); transform: translateX(3px); }
 .legal-flip-actions { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .legal-flip-back-button { padding: 0; color: rgba(255, 255, 255, 0.64); background: transparent; cursor: pointer; }

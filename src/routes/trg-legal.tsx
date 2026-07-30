@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import {
   ArrowUpRight,
   Check,
@@ -594,16 +595,16 @@ export function TrgLegalPage() {
           <div className="legal-team-cards-wrap">
             <div className="legal-team-grid">
               {TRG_LEGAL_TEAM.map((member) => (
-                <LegalTeamCard key={member.name} member={member} />
+                <LegalTeamCard key={member.id} member={member} />
               ))}
             </div>
-            <a
+            <Link
               className="legal-button legal-button-dark legal-team-cta"
-              href="/trg-legal/equipo"
+              to="/equipo"
             >
               Conoce a nuestro equipo{" "}
               <ArrowUpRight size={16} strokeWidth={1.5} />
-            </a>
+            </Link>
           </div>
         </section>
 
