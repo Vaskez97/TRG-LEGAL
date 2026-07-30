@@ -31,18 +31,23 @@ function LegalTeamPage() {
             <h1>Las personas detrás de cada decisión.</h1>
           </div>
           <p>
-            Un equipo que combina experiencia jurídica, conocimiento de la operación y una mirada
-            cercana para acompañar a empresas de transporte y logística.
+            No trabajamos desde la distancia. Combinamos experiencia jurídica, contexto operativo y
+            una mirada cercana para acompañar decisiones que importan.
           </p>
+          <div className="legal-team-screen-hero-mark" aria-hidden="true">
+            <span>TRG</span>
+            <strong>LEGAL</strong>
+            <small>PERSONAS · CRITERIO · CONTEXTO</small>
+          </div>
         </section>
 
         <section className="legal-team-directory" id="equipo-completo">
           <div className="legal-team-directory-heading">
             <span className="legal-kicker">Conoce al equipo</span>
-            <h2>Haz clic en cada tarjeta para ver más.</h2>
+            <h2>Criterio jurídico que se construye en equipo.</h2>
             <p>
-              Descubre el rol de cada profesional y visita su perfil de LinkedIn cuando esté
-              disponible.
+              Conoce la mirada de cada integrante y descubre cómo aportamos experiencia y claridad
+              a cada desafío.
             </p>
           </div>
           <div className="legal-team-directory-grid">
@@ -67,7 +72,11 @@ function LegalTeamPage() {
 
       <footer className="legal-footer legal-team-page-footer">
         <a href="/" aria-label="TRG Legal, inicio">
-          <img src="/assets/trg-legal-logo.png" alt="TRG Legal" />
+          <img
+            src="/assets/trg-legal-logo.png"
+            className="is-light"
+            alt="TRG Legal"
+          />
         </a>
         <span>© {new Date().getFullYear()} TRG Legal. Todos los derechos reservados.</span>
         <a href="/#contacto">Hablemos</a>
