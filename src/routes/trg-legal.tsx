@@ -5,7 +5,6 @@ import {
   Check,
   ChevronDown,
   Linkedin,
-  Lock,
   Mail,
   MapPin,
   Menu,
@@ -31,8 +30,6 @@ export const Route = createFileRoute("/trg-legal")({
   component: TrgLegalPage,
 });
 
-const VIDEO_URL =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260510_060007_60275ce7-030c-4668-a160-8f364ec537d3.mp4";
 const GROUP_TRG_URL = "https://trg-camila-salazar.pages.dev/";
 
 const services = [
@@ -337,7 +334,7 @@ function LegalContactForm() {
 
 export function TrgLegalPage() {
   const heroRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const heroImageRef = useRef<HTMLImageElement>(null);
   const [activeService, setActiveService] = useState<
     (typeof services)[number] | null
   >(null);
@@ -357,8 +354,8 @@ export function TrgLegalPage() {
 
   useEffect(() => {
     const hero = heroRef.current;
-    const video = videoRef.current;
-    if (!hero || !video) return;
+    const heroImage = heroImageRef.current;
+    if (!hero || !heroImage) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -391,7 +388,7 @@ export function TrgLegalPage() {
     const renderParallax = () => {
       currentX += (targetX - currentX) * 0.06;
       currentY += (targetY - currentY) * 0.06;
-      gsap.set(video, { x: currentX, y: currentY });
+      gsap.set(heroImage, { x: currentX, y: currentY });
       raf = requestAnimationFrame(renderParallax);
     };
 
@@ -412,18 +409,12 @@ export function TrgLegalPage() {
       <main>
         <section className="legal-hero" ref={heroRef}>
           <div className="legal-hero-media" aria-hidden="true">
-            <video
-              ref={videoRef}
-              className="legal-hero-video"
-              src={VIDEO_URL}
-              poster="/assets/trg-legal-hero.png"
-              autoPlay
-              muted
-              loop
-              playsInline
-              onLoadedMetadata={(event) => {
-                event.currentTarget.playbackRate = 1.25;
-              }}
+            <img
+              ref={heroImageRef}
+              className="legal-hero-image"
+              src="/assets/trg-legal-hero.png"
+              alt=""
+              loading="eager"
             />
           </div>
           <div className="legal-hero-shade" aria-hidden="true" />
@@ -433,30 +424,26 @@ export function TrgLegalPage() {
               <span className="legal-kicker">TRG LEGAL · DERECHO LABORAL</span>
               <h1>
                 Conocemos la industria.
-                <br />
                 <em>Entendemos sus desafíos.</em>
               </h1>
+              <p>
+                Acompañamos a empresas de transporte y logística con soluciones jurídicas claras,
+                estratégicas y conectadas con la operación.
+              </p>
+              <div className="legal-hero-actions">
+                <a className="legal-button legal-button-light" href="#contacto">
+                  Conversemos <ArrowUpRight size={16} strokeWidth={1.5} />
+                </a>
+                <a className="legal-hero-secondary" href="#servicios">
+                  Explorar servicios <ChevronDown size={15} strokeWidth={1.5} />
+                </a>
+              </div>
             </div>
           </div>
-          <div className="legal-hero-bottom-block hero-reveal">
-            <p>
-              Acompañamos a empresas del sector con soluciones jurídicas
-              estratégicas y cercanas, respaldadas por la experiencia del
-              ecosistema Grupo TRG.
-            </p>
-            <a className="legal-button legal-button-light" href="#contacto">
-              Conversemos hoy <ArrowUpRight size={16} strokeWidth={1.5} />
-            </a>
-            <div className="legal-hero-trust">
-              <Lock size={13} strokeWidth={1.5} />
-              <span>CONOCIMIENTO DEL RUBRO. CRITERIO PARA DECIDIR.</span>
-            </div>
-          </div>
-          <div className="legal-hero-scroll hero-reveal">
-            <span>Explora TRG Legal</span>
-            <a href="#quienes-somos" aria-label="Bajar a quiénes somos">
-              <ChevronDown size={17} strokeWidth={1.4} />
-            </a>
+          <div className="legal-hero-credentials hero-reveal">
+            <span>ASESORÍA LABORAL ESPECIALIZADA</span>
+            <span>TRANSPORTE · LOGÍSTICA · OPERACIONES</span>
+            <span>SANTIAGO · CHILE</span>
           </div>
         </section>
 
@@ -494,11 +481,19 @@ export function TrgLegalPage() {
             </div>
           </div>
           <div className="legal-about-details">
-            {aboutFacts.map((fact) => (
-              <div className="legal-about-detail" key={fact.label}>
-                <strong>{fact.label}</strong>
-                <p>{fact.detail}</p>
-              </div>
+            {aboutFacts.map((fact, index) => (
+              <article className="legal-about-detail" key={fact.label}>
+                <div className="legal-about-detail-top">
+                  <span className="legal-about-detail-number" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="legal-about-detail-line" aria-hidden="true" />
+                </div>
+                <div className="legal-about-detail-copy">
+                  <strong>{fact.label}</strong>
+                  <p>{fact.detail}</p>
+                </div>
+              </article>
             ))}
           </div>
         </section>
@@ -655,48 +650,86 @@ export function TrgLegalPage() {
         </section>
 
         <section className="legal-why" id="por-que">
-          <div className="legal-why-backdrop" aria-hidden="true" />
-          <div className="legal-section-number">05 / 05</div>
-          <div className="legal-why-content">
-            <span className="legal-kicker legal-kicker-light">
-              Por qué TRG Legal
-            </span>
-            <h2>La certeza jurídica también se construye con contexto.</h2>
-            <p>
-              Somos parte de Grupo TRG: un ecosistema que conoce el transporte,
-              la logística y la operación desde dentro. Esa cercanía nos permite
-              traducir el derecho en decisiones claras, oportunas y aplicables.
-            </p>
-            <div className="legal-why-points">
-              <span>
-                <Check size={15} strokeWidth={1.5} /> Especialización sectorial
-              </span>
-              <span>
-                <Check size={15} strokeWidth={1.5} /> Acompañamiento estratégico
-              </span>
-              <span>
-                <Check size={15} strokeWidth={1.5} /> Respaldo de Grupo TRG
-              </span>
-            </div>
+          <div className="legal-why-transition" aria-hidden="true">
+            <span>PERSONAS</span>
+            <i />
+            <strong>Del equipo al ecosistema</strong>
+            <i />
+            <span>CONTEXTO</span>
           </div>
-          <div className="legal-ecosystem">
-            <span>Parte de un ecosistema con experiencia</span>
-            <a
-              href={GROUP_TRG_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="legal-ecosystem-link"
-            >
-              <strong>
-                grupo <i>TRG</i>
-              </strong>
-            </a>
-            <div className="legal-ecosystem-divider" />
-            <strong>
-              TRG <i>LEGAL</i>
-            </strong>
-            <div className="legal-ecosystem-divider" />
-            <strong>TLS</strong>
+
+          <div className="legal-why-panel">
+            <div className="legal-why-backdrop" aria-hidden="true" />
+            <div className="legal-section-number">05 / 05</div>
+
+            <div className="legal-why-layout">
+              <div className="legal-why-content">
+                <span className="legal-kicker legal-kicker-light">
+                  Por qué TRG Legal
+                </span>
+                <h2>La certeza jurídica también se construye con contexto.</h2>
+                <p>
+                  Somos parte de Grupo TRG: un ecosistema que conoce el
+                  transporte, la logística y la operación desde dentro. Esa
+                  cercanía nos permite traducir el derecho en decisiones claras,
+                  oportunas y aplicables.
+                </p>
+              </div>
+
+              <div className="legal-why-points" aria-label="Fortalezas de TRG Legal">
+                <article>
+                  <span>01</span>
+                  <Check size={17} strokeWidth={1.5} />
+                  <strong>Especialización sectorial</strong>
+                  <p>Conocimiento jurídico conectado con la realidad diaria del transporte.</p>
+                </article>
+                <article>
+                  <span>02</span>
+                  <Check size={17} strokeWidth={1.5} />
+                  <strong>Acompañamiento estratégico</strong>
+                  <p>Decisiones oportunas, cercanas y alineadas con cada operación.</p>
+                </article>
+                <article>
+                  <span>03</span>
+                  <Check size={17} strokeWidth={1.5} />
+                  <strong>Respaldo de Grupo TRG</strong>
+                  <p>Una mirada integral que reúne experiencia legal, logística y operacional.</p>
+                </article>
+              </div>
+            </div>
+
+            <div className="legal-ecosystem">
+              <div className="legal-ecosystem-intro">
+                <span>Parte de un ecosistema con experiencia</span>
+                <p>Soluciones conectadas para decisiones que exigen una visión completa.</p>
+              </div>
+              <div className="legal-ecosystem-brands" aria-label="Empresas de Grupo TRG">
+                <a
+                  href={GROUP_TRG_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="legal-ecosystem-link"
+                >
+                  <strong>
+                    grupo <i>TRG</i>
+                  </strong>
+                </a>
+                <div className="legal-ecosystem-divider" />
+                <strong>
+                  TRG <i>LEGAL</i>
+                </strong>
+                <div className="legal-ecosystem-divider" />
+                <strong>TLS</strong>
+              </div>
+              <a
+                href={GROUP_TRG_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="legal-ecosystem-cta"
+              >
+                Conoce Grupo TRG <ArrowUpRight size={16} strokeWidth={1.5} />
+              </a>
+            </div>
           </div>
         </section>
 
