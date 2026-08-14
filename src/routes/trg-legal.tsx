@@ -715,7 +715,7 @@ export function TrgLegalPage() {
                   </strong>
                 </a>
                 <div className="legal-ecosystem-divider" />
-                <strong>
+                <strong className="legal-ecosystem-current">
                   TRG <i>LEGAL</i>
                 </strong>
                 <div className="legal-ecosystem-divider" />
