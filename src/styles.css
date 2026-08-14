@@ -1949,6 +1949,12 @@ html {
   display: flex;
   width: max-content;
   animation: legalBodyMarquee 34s linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+
+.legal-body-marquee.is-visible .legal-body-marquee-track {
+  animation-play-state: running;
 }
 
 .legal-body-marquee-card {
@@ -1967,6 +1973,11 @@ html {
   height: 100%;
   object-fit: cover;
   filter: saturate(0.78) contrast(1.02);
+}
+
+.legal-body-marquee {
+  content-visibility: auto;
+  contain-intrinsic-size: 420px;
 }
 
 @keyframes legalBodyMarquee {
@@ -4022,7 +4033,7 @@ html {
   background:
     linear-gradient(90deg, rgba(4, 18, 35, 0.99) 0%, rgba(4, 18, 35, 0.94) 46%, rgba(4, 18, 35, 0.58) 76%, rgba(4, 18, 35, 0.72) 100%),
     linear-gradient(180deg, rgba(4, 18, 35, 0.25), rgba(4, 18, 35, 0.82)),
-    url("/assets/trg-legal-hero.png") 78% center / cover no-repeat;
+    url("/assets/trg-legal-hero.jpg") 78% center / cover no-repeat;
   filter: saturate(0.58) contrast(1.08);
   opacity: 1;
 }
@@ -4326,7 +4337,7 @@ html {
   .legal-page .legal-why-backdrop {
     background:
       linear-gradient(180deg, rgba(4, 18, 35, 0.94) 0%, rgba(4, 18, 35, 0.88) 42%, rgba(4, 18, 35, 0.98) 100%),
-      url("/assets/trg-legal-hero.png") 64% top / auto 650px no-repeat;
+      url("/assets/trg-legal-hero.jpg") 64% top / auto 650px no-repeat;
   }
 
   .legal-why-panel::after {
@@ -4606,7 +4617,7 @@ html {
   background:
     linear-gradient(90deg, rgba(4, 18, 35, 0.985) 0%, rgba(4, 18, 35, 0.94) 52%, rgba(4, 18, 35, 0.72) 100%),
     linear-gradient(180deg, rgba(4, 18, 35, 0.16), rgba(4, 18, 35, 0.86)),
-    url("/assets/trg-legal-hero.png") 82% center / cover no-repeat;
+    url("/assets/trg-legal-hero.jpg") 82% center / cover no-repeat;
   filter: saturate(0.48) contrast(1.06);
 }
 

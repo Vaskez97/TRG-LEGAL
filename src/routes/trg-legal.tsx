@@ -125,7 +125,7 @@ const aboutFacts = [
 
 const bodyImages = [
   {
-    src: "/assets/trg-legal-hero.png",
+    src: "/assets/trg-legal-hero.jpg",
     alt: "Balanza jurídica frente a contenedores",
   },
   {
@@ -377,29 +377,76 @@ export function TrgLegalPage() {
     let currentX = 0;
     let currentY = 0;
     let raf = 0;
+    let isHeroVisible = true;
+
+    const scheduleParallax = () => {
+      if (!raf && isHeroVisible && !document.hidden) {
+        raf = requestAnimationFrame(renderParallax);
+      }
+    };
 
     const handlePointer = (event: MouseEvent) => {
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
       targetX = ((event.clientX - centerX) / centerX) * 18;
       targetY = ((event.clientY - centerY) / centerY) * 12;
+      scheduleParallax();
     };
 
     const renderParallax = () => {
+      raf = 0;
+      if (!isHeroVisible || document.hidden) return;
+
       currentX += (targetX - currentX) * 0.06;
       currentY += (targetY - currentY) * 0.06;
       gsap.set(heroImage, { x: currentX, y: currentY });
-      raf = requestAnimationFrame(renderParallax);
+
+      if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+        raf = requestAnimationFrame(renderParallax);
+      }
+    };
+
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        isHeroVisible = entry.isIntersecting;
+        if (isHeroVisible) scheduleParallax();
+        else if (raf) cancelAnimationFrame(raf);
+      },
+      { threshold: 0.01 },
+    );
+
+    const handleVisibility = () => {
+      if (document.hidden && raf) cancelAnimationFrame(raf);
+      if (!document.hidden) scheduleParallax();
     };
 
     window.addEventListener("mousemove", handlePointer, { passive: true });
-    renderParallax();
+    document.addEventListener("visibilitychange", handleVisibility);
+    heroObserver.observe(hero);
 
     return () => {
       window.removeEventListener("mousemove", handlePointer);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      heroObserver.disconnect();
       cancelAnimationFrame(raf);
       ctx.revert();
     };
+  }, []);
+
+  useEffect(() => {
+    const marquee = document.querySelector<HTMLElement>(".legal-body-marquee");
+    const track = marquee?.querySelector<HTMLElement>(".legal-body-marquee-track");
+    if (!marquee || !track) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        marquee.classList.toggle("is-visible", entry.isIntersecting);
+      },
+      { threshold: 0.01 },
+    );
+
+    observer.observe(marquee);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -412,9 +459,11 @@ export function TrgLegalPage() {
             <img
               ref={heroImageRef}
               className="legal-hero-image"
-              src="/assets/trg-legal-hero.png"
+              src="/assets/trg-legal-hero.jpg"
               alt=""
               loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
           </div>
           <div className="legal-hero-shade" aria-hidden="true" />
@@ -508,7 +557,12 @@ export function TrgLegalPage() {
                 className="legal-body-marquee-card"
                 key={`${image.src}-${index}`}
               >
-                <img src={image.src} alt={image.alt} loading="lazy" />
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             ))}
           </div>

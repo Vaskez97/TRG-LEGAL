@@ -20,7 +20,7 @@ const items = [
   [
     "TRG Legal",
     "Acompañamiento jurídico especializado en cumplimiento, relaciones laborales y prevención de riesgos legales.",
-    "/assets/trg-legal-hero.png",
+    "/assets/trg-legal-hero.jpg",
     "/trg-legal",
   ],
 ];
